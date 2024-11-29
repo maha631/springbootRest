@@ -1,0 +1,58 @@
+<!-- <div class="sidebar">
+    <h2>Menu</h2>
+    <ul class="nav flex-column">
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/dashboard">
+          <i class="bi bi-house-door-fill"></i> Dashboard
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/dishes">
+          <i class="bi bi-egg-fried"></i> Dishes
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/settings">
+          <i class="bi bi-gear-fill"></i> Settings
+        </a>
+      </li>
+    </ul>
+  </div>
+   -->
+   <div class="sidebar" [class.dark]="isDarkMode" [class.collapsed]="isCollapsed">
+    <!-- Logo Section -->
+    <div class="logo-section">
+      <img src="public/logo.png" alt="Logo" class="logo">
+      <div class="logo-welcom">
+        <h2>Welcome</h2>
+        <p>Admin YallaEat</p>
+      </div>
+    </div>
+  
+    <!-- Navigation Menu -->
+    <nav class="nav-menu">
+      <ul>
+        <li><a routerLink="/dashboard"><i class="bi bi-house-door"></i> Dashboard</a></li>
+        <li><a routerLink="/dishes"><i class="bi bi-basket2"></i> Dishes</a></li>
+        <li><a routerLink="/sessions"><i class="bi bi-hourglass"></i>Sessions</a></li>
+
+        <li><a routerLink="/settings"><i class="bi bi-gear"></i> Settings</a></li>
+      </ul>
+    </nav>
+  
+    <!-- Sidebar Footer -->
+    <div class="sidebar-footer">
+      <button class="logout" (click)="handleLogout()">
+        <i class="bi bi-box-arrow-left"></i> Logout
+      </button>
+  
+      <div class="toggle-container" (click)="toggleDarkMode()">
+        <input type="checkbox" id="darkModeSwitch" [checked]="isDarkMode" (change)="toggleDarkMode()">
+        <label for="darkModeSwitch" class="toggle-label">
+          <span class="icon">{{ isDarkMode ? '🌙' : '☀️' }}</span>
+          <span class="mode-text">{{ isDarkMode ? 'Night Mode' : 'Day Mode' }}</span>
+        </label>
+      </div>
+    </div>
+  </div>
+  

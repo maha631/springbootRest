@@ -1,32 +1,150 @@
-<!-- <div class="dish-list">
-  <h2>Dish List</h2>
-  <ul>
-    <li *ngFor="let dish of dishes">
-      <h3>{{ dish.entree }} - {{ dish.mainCourse }}</h3>
-      <p>Side Dish: {{ dish.sideDish }}</p>
-      <p>Dessert: {{ dish.dessert }}</p>
-      <button >Delete</button>
-      <button [routerLink]="['/edit', dish.id]">Edit</button> 
-    </li>
-  </ul>
-</div> -->
-<div class="dish-list">
-  <h2>Liste des plats</h2>
 
-  <!-- Message de chargement -->
-  <p *ngIf="loading">Chargement des plats...</p>
+<div class="dish-page">
+  <h1 class="text-center my-4">Dish Management</h1>
 
-  <!-- Message d'erreur -->
-  <p *ngIf="error" class="error">{{ error }}</p>
+  <!-- Bouton Add Dish -->
+  <div class="add-dish-btn">
+    <button class="btn btn-primary" (click)="openAddDishModal()">Add Dish</button>
+  </div>
 
-  <!-- Liste des plats -->
-  <ul *ngIf="!loading && !error">
-    <li *ngFor="let dish of dishes">
-      <h3>{{ dish.entree }} - {{ dish.mainCourse }}</h3>
-      <p>Accompagnement : {{ dish.sideDish }}</p>
-      <p>Dessert : {{ dish.dessert }}</p>
-      <button (click)="deleteDish(dish.id)">Supprimer</button>
-      <button [routerLink]="['/dishes/edit', dish.id]">Modifier</button>
-    </li>
-  </ul>
+  <!-- Tableau des plats -->
+  <div class="dish-box">
+    <table class="dish-table">
+      <thead>
+        <tr>
+          <th>Entree</th>
+          <th>Main Course</th>
+          <th>Side Dish</th>
+          <th>Dessert</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let dish of paginatedDishes">
+          <td>{{ dish.entree }}</td>
+          <td>{{ dish.mainCourse }}</td>
+          <td>{{ dish.sideDish }}</td>
+          <td>{{ dish.dessert }}</td>
+          <td>
+            <button class="btn btn-sm btn-warning" (click)="openEditDishModal(dish)">
+              <i class="bi bi-pencil-fill"></i>
+            </button>
+            <button class="btn btn-sm btn-danger" (click)="deleteDish(dish.id)">
+              <i class="bi bi-trash-fill"></i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Pagination -->
+  <div class="pagination">
+    <button class="btn btn-secondary mx-1" [disabled]="currentPage === 1" (click)="changePage(currentPage - 1)">
+      Previous
+    </button>
+    <button *ngFor="let page of totalPagesArray" class="btn mx-1" [class.btn-primary]="page === currentPage"
+      [class.btn-light]="page !== currentPage" (click)="changePage(page)">
+      {{ page }}
+    </button>
+    <button class="btn btn-secondary mx-1" [disabled]="currentPage === totalPages"
+      (click)="changePage(currentPage + 1)">
+      Next
+    </button>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="dishModal" tabindex="-1" aria-labelledby="dishModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="dishModalLabel">{{ isEditMode ? 'Edit Dish' : 'Add Dish' }}</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="row">
+              <!-- Champ Entree -->
+              <div class="col-6 mb-3">
+                <label for="entree" class="form-label">Entree</label>
+                <input
+                  [(ngModel)]="currentDish.entree"
+                  name="entree"
+                  type="text"
+                  class="form-control"
+                  id="entree"
+                  required
+                />
+              </div>
+              <!-- Champ Main Course -->
+              <div class="col-6 mb-3">
+                <label for="mainCourse" class="form-label">Main Course</label>
+                <input
+                  [(ngModel)]="currentDish.mainCourse"
+                  name="mainCourse"
+                  type="text"
+                  class="form-control"
+                  id="mainCourse"
+                  required
+                />
+              </div>
+              <!-- Champ Side Dish -->
+              <div class="col-6 mb-3">
+                <label for="sideDish" class="form-label">Side Dish</label>
+                <input
+                  [(ngModel)]="currentDish.sideDish"
+                  name="sideDish"
+                  type="text"
+                  class="form-control"
+                  id="sideDish"
+                  required
+                />
+              </div>
+              <!-- Champ Dessert -->
+              <div class="col-6 mb-3">
+                <label for="dessert" class="form-label">Dessert</label>
+                <input
+                  [(ngModel)]="currentDish.dessert"
+                  name="dessert"
+                  type="text"
+                  class="form-control"
+                  id="dessert"
+                  required
+                />
+              </div>
+            </div>
+          </form>
+          
+          <!-- <form>
+            <div class="input-group">
+              <label for="entree" class="form-label">Entree</label>
+              <input [(ngModel)]="currentDish.entree" name="entree" type="text" class="form-control" id="entree"
+                required />
+            </div>
+            <div class="input-group">
+              <label for="mainCourse" class="form-label">Main Course</label>
+              <input [(ngModel)]="currentDish.mainCourse" name="mainCourse" type="text" class="form-control"
+                id="mainCourse" required />
+            </div>
+            <div class="input-group">
+              <label for="sideDish" class="form-label">Side Dish</label>
+              <input [(ngModel)]="currentDish.sideDish" name="sideDish" type="text" class="form-control" id="sideDish"
+                required />
+            </div>
+            <div class="input-group">
+              <label for="dessert" class="form-label">Dessert</label>
+              <input [(ngModel)]="currentDish.dessert" name="dessert" type="text" class="form-control" id="dessert"
+                required />
+            </div>
+          </form> -->
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-primary" (click)="saveDish()">
+            {{ isEditMode ? 'Save Changes' : 'Add Dish' }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

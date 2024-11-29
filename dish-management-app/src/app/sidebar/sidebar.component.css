@@ -1,0 +1,143 @@
+/* Sidebar Styles */
+.sidebar {
+  width: 250px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background-color: white;
+  padding: 20px;
+  box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.sidebar.dark {
+  background-color: #1e1e2f; /* Dark mode background color */
+  color: white;
+}
+
+.logo-section {
+  display: flex;
+  margin-bottom: 40px;
+}
+
+.logo-welcom {
+  display: block;
+  font-weight: bold;
+}
+
+.logo {
+  width: 90px;
+  height: 80px;
+  border-radius: 10px;
+  object-fit: contain; /* Ajoute cette propriété pour garantir que l'image garde ses proportions */
+}
+
+
+.nav-menu ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.nav-menu ul li {
+  margin: 20px 0;
+}
+
+.nav-menu ul li a {
+  text-decoration: none;
+  font-size: 18px;
+  color: black;
+  display: flex;
+  align-items: center;
+  padding: 10px 15px;
+  border-radius: 8px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.sidebar.dark .nav-menu ul li a {
+  color: white;
+}
+
+.nav-menu ul li a:hover {
+  background-color: #d4dcff;
+}
+
+.sidebar.dark .nav-menu ul li a:hover {
+  background-color: #3e3e5e; /* Dark mode hover background */
+}
+
+.sidebar-footer {
+  margin-top: 70px;
+  text-align: center;
+}
+
+.logout {
+  display: block;
+  margin-bottom: 20px;
+  color: #5b5f97;
+  text-decoration: none;
+  font-size: 16px;
+}
+
+.sidebar.dark .logout {
+  color: #9baacf; /* Adjusted color for dark mode */
+}
+
+.toggle-container {
+  display: flex;
+  align-items: center;
+  background-color: #f0f0f0;
+  border-radius: 30px;
+  padding: 10px;
+  width: 180px;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.toggle-container.night {
+  background-color: #222;
+}
+
+.toggle-label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.mode-text {
+  font-size: 16px;
+  font-weight: bold;
+  margin-left: 10px;
+}
+
+.icon {
+  font-size: 20px;
+}
+
+input[type="checkbox"] {
+  display: none;
+}
+
+/* Day Mode */
+.toggle-container.day .mode-text {
+  color: #333;
+}
+
+/* Night Mode */
+.toggle-container.night .mode-text {
+  color: white;
+}
+
+/* Dark Mode Body */
+body.dark-mode {
+  background-color: #333;
+  color: white;
+}
+.logout {
+  display: block;
+  margin-bottom: 20px;
+  color: #5b5f97;
+  text-decoration: none;
+  font-size: 16px;
+}

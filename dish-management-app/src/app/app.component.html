@@ -1,7 +1,9 @@
-<main class="main">
+<div class="app-container">
+  <!-- Sidebar Component -->
+  <app-sidebar></app-sidebar>
 
-</main>
-
-
-
-<router-outlet />
+  <!-- Main Content -->
+  <div class="main-content">
+    <router-outlet></router-outlet> <!-- Contenu dynamique de la route -->
+  </div>
+</div>
