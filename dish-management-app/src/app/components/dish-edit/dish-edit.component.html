@@ -1,0 +1,18 @@
+<div class="dish-edit">
+  <h2>Edit Dish</h2>
+  <form (ngSubmit)="editDish()" #dishForm="ngForm">
+    <label for="entree">Entree:</label>
+    <input type="text" id="entree" name="entree" [(ngModel)]="dish.entree" required />
+
+    <label for="mainCourse">Main Course:</label>
+    <input type="text" id="mainCourse" name="mainCourse" [(ngModel)]="dish.mainCourse" required />
+
+    <label for="sideDish">Side Dish:</label>
+    <input type="text" id="sideDish" name="sideDish" [(ngModel)]="dish.sideDish" required />
+
+    <label for="dessert">Dessert:</label>
+    <input type="text" id="dessert" name="dessert" [(ngModel)]="dish.dessert" required />
+
+    <button type="submit" [disabled]="!dishForm.valid">Save Changes</button>
+  </form>
+</div>

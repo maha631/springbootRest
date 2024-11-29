@@ -1,0 +1,32 @@
+<!-- <div class="dish-list">
+  <h2>Dish List</h2>
+  <ul>
+    <li *ngFor="let dish of dishes">
+      <h3>{{ dish.entree }} - {{ dish.mainCourse }}</h3>
+      <p>Side Dish: {{ dish.sideDish }}</p>
+      <p>Dessert: {{ dish.dessert }}</p>
+      <button >Delete</button>
+      <button [routerLink]="['/edit', dish.id]">Edit</button> 
+    </li>
+  </ul>
+</div> -->
+<div class="dish-list">
+  <h2>Liste des plats</h2>
+
+  <!-- Message de chargement -->
+  <p *ngIf="loading">Chargement des plats...</p>
+
+  <!-- Message d'erreur -->
+  <p *ngIf="error" class="error">{{ error }}</p>
+
+  <!-- Liste des plats -->
+  <ul *ngIf="!loading && !error">
+    <li *ngFor="let dish of dishes">
+      <h3>{{ dish.entree }} - {{ dish.mainCourse }}</h3>
+      <p>Accompagnement : {{ dish.sideDish }}</p>
+      <p>Dessert : {{ dish.dessert }}</p>
+      <button (click)="deleteDish(dish.id)">Supprimer</button>
+      <button [routerLink]="['/dishes/edit', dish.id]">Modifier</button>
+    </li>
+  </ul>
+</div>

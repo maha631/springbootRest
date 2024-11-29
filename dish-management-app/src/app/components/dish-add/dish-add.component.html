@@ -1,0 +1,20 @@
+
+   <div class="dish-add">
+    <h2>Add a New Dish</h2>
+    <form (ngSubmit)="addDish()" #dishForm="ngForm">
+      <label for="entree">Entree:</label>
+      <input type="text" id="entree" name="entree" [(ngModel)]="newDish.entree" required />
+  
+      <label for="mainCourse">Main Course:</label>
+      <input type="text" id="mainCourse" name="mainCourse" [(ngModel)]="newDish.mainCourse" required />
+  
+      <label for="sideDish">Side Dish:</label>
+      <input type="text" id="sideDish" name="sideDish" [(ngModel)]="newDish.sideDish" required />
+  
+      <label for="dessert">Dessert:</label>
+      <input type="text" id="dessert" name="dessert" [(ngModel)]="newDish.dessert" required />
+  
+      <button type="submit" [disabled]="!dishForm.valid">Add Dish</button>
+    </form>
+  </div>
+  
